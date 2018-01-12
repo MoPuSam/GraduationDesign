@@ -1,78 +1,151 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cn.hnust.dao.IUserDao" >
-  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="age" property="age" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.hnust.dao.IUserDao">
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.User">
+    <result column="u_id" jdbcType="VARCHAR" property="uId" />
+    <result column="u_nickname" jdbcType="VARCHAR" property="uNickname" />
+    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+    <result column="u_sex" jdbcType="INTEGER" property="uSex" />
+    <result column="u_athor" jdbcType="INTEGER" property="uAthor" />
+    <result column="lastlogintime" jdbcType="VARCHAR" property="lastlogintime" />
+    <result column="addtime" jdbcType="VARCHAR" property="addtime" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <insert id="insert" parameterType="com.cn.hnust.pojo.User">
+    insert into gf_users (u_id, u_nickname, u_password, 
+      u_sex, u_athor, lastlogintime, 
+      addtime, photo)
+    values (#{uId,jdbcType=VARCHAR}, #{uNickname,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR}, 
+      #{uSex,jdbcType=INTEGER}, #{uAthor,jdbcType=INTEGER}, #{lastlogintime,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.User">
+    insert into gf_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uNickname != null">
+        u_nickname,
+      </if>
+      <if test="uPassword != null">
+        u_password,
+      </if>
+      <if test="uSex != null">
+        u_sex,
+      </if>
+      <if test="uAthor != null">
+        u_athor,
+      </if>
+      <if test="lastlogintime != null">
+        lastlogintime,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNickname != null">
+        #{uNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null">
+        #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null">
+        #{uSex,jdbcType=INTEGER},
+      </if>
+      <if test="uAthor != null">
+        #{uAthor,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <sql id="Base_Column_List">
     id, user_name, password, age
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_t
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.cn.hnust.pojo.User" >
+  <insert id="insert" parameterType="com.cn.hnust.pojo.User">
     insert into user_t (id, user_name, password, 
       age)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.User" >
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.User">
     insert into user_t
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="userName != null" >
+      <if test="userName != null">
         user_name,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         age,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="userName != null" >
+      <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         #{age,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.User">
     update user_t
-    <set >
-      <if test="userName != null" >
+    <set>
+      <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         age = #{age,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.User" >
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.User">
     update user_t
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
