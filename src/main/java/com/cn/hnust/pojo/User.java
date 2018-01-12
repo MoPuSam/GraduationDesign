@@ -1,43 +1,87 @@
 package com.cn.hnust.pojo;
 
-public class User {
-    private Integer id;
+import java.io.Serializable;
 
-    private String userName;
+public class User implements Serializable {
+    private String uId;
 
-    private String password;
+    private String uNickname;
 
-    private Integer age;
+    private String uPassword;
 
-    public Integer getId() {
-        return id;
+    private Integer uSex;
+
+    private Integer uAthor;
+
+    private String lastlogintime;
+
+    private String addtime;
+
+    private String photo;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getuId() {
+        return uId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setuId(String uId) {
+        this.uId = uId == null ? null : uId.trim();
     }
 
-    public String getUserName() {
-        return userName;
+    public String getuNickname() {
+        return uNickname;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setuNickname(String uNickname) {
+        this.uNickname = uNickname == null ? null : uNickname.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getuPassword() {
+        return uPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setuPassword(String uPassword) {
+        this.uPassword = uPassword == null ? null : uPassword.trim();
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getuSex() {
+        return uSex;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setuSex(Integer uSex) {
+        this.uSex = uSex;
+    }
+
+    public Integer getuAthor() {
+        return uAthor;
+    }
+
+    public void setuAthor(Integer uAthor) {
+        this.uAthor = uAthor;
+    }
+
+    public String getLastlogintime() {
+        return lastlogintime;
+    }
+
+    public void setLastlogintime(String lastlogintime) {
+        this.lastlogintime = lastlogintime == null ? null : lastlogintime.trim();
+    }
+
+    public String getAddtime() {
+        return addtime;
+    }
+
+    public void setAddtime(String addtime) {
+        this.addtime = addtime == null ? null : addtime.trim();
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo == null ? null : photo.trim();
     }
 }
