@@ -3,11 +3,11 @@ package com.cn.hnust.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.hnust.pojo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
 
 @Controller
