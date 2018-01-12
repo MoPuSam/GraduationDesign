@@ -1,9 +1,7 @@
 package com.cn.hnust.controller;
 
-import com.cn.hnust.pojo.User;
 import com.cn.hnust.util.CheckCodeUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
