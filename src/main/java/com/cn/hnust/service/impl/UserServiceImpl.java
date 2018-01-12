@@ -2,6 +2,8 @@ package com.cn.hnust.service.impl;
 
 import javax.annotation.Resource;
 
+import com.cn.hnust.dao.IUserDao;
+import com.cn.hnust.pojo.User;
 import org.springframework.stereotype.Service;
 
 import com.cn.hnust.service.IUserService;
@@ -13,7 +15,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserById(int userId) {
 		// TODO Auto-generated method stub
-		return this.userDao.selectByPrimaryKey(userId);
+		return null;
 	}
 
 }
