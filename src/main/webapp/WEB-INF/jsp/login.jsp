@@ -67,7 +67,7 @@
                     <input type="checkbox" />记住我的登录信息
                 </label>
                 <label style="margin-left:50%">
-                    <a href="regist.html">注册</a>
+                    <a href="${pageContext.request.contextPath}/login/regist">注册</a>
                 </label>
             </div>
             <button class="login_btn"><h4 class="mg-b20"><a>登 录</a></h4></button>
