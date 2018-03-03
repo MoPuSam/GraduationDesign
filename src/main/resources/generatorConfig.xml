@@ -65,7 +65,7 @@
         </table>-->
         <!-- 配置表信息 -->
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="" tableName="GF_POSTS" domainObjectName="Post"
+        <table schema="" tableName="gf_post_iterm" domainObjectName="PostIterm"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

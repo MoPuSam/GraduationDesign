@@ -3,11 +3,15 @@ package com.cn.hnust.pojo;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String uId;
+    private Integer uId;
 
     private String uNickname;
 
     private String uPassword;
+
+    private String uEmail;
+
+    private String uPhone;
 
     private Integer uSex;
 
@@ -21,12 +25,12 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getuId() {
+    public Integer getuId() {
         return uId;
     }
 
-    public void setuId(String uId) {
-        this.uId = uId == null ? null : uId.trim();
+    public void setuId(Integer uId) {
+        this.uId = uId;
     }
 
     public String getuNickname() {
@@ -43,6 +47,22 @@ public class User implements Serializable {
 
     public void setuPassword(String uPassword) {
         this.uPassword = uPassword == null ? null : uPassword.trim();
+    }
+
+    public String getuEmail() {
+        return uEmail;
+    }
+
+    public void setuEmail(String uEmail) {
+        this.uEmail = uEmail == null ? null : uEmail.trim();
+    }
+
+    public String getuPhone() {
+        return uPhone;
+    }
+
+    public void setuPhone(String uPhone) {
+        this.uPhone = uPhone == null ? null : uPhone.trim();
     }
 
     public Integer getuSex() {

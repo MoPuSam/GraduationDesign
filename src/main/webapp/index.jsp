@@ -10,6 +10,6 @@
 <%--<h2>Hello IDeal!</h2>
 <a href="${pageContext.request.contextPath}/user/showUser?id=1">跳转demo</a><br/>
 <a href="${pageContext.request.contextPath}/login/index">登陆页面</a>--%>
-<jsp:include page="/login/index"/>
+<jsp:include page="${pageContext.request.contextPath}/login/index"/>
 </body>
 </html>

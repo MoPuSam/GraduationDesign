@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Post implements Serializable {
     private String pId;
 
-    private String pUid;
+    private Integer pUid;
 
     private String pTitle;
 
@@ -15,7 +15,7 @@ public class Post implements Serializable {
 
     private String tags;
 
-    private String category;
+    private Integer category;
 
     private Integer ishot;
 
@@ -27,6 +27,8 @@ public class Post implements Serializable {
 
     private Integer ispass;
 
+    private User pUser;
+
     private static final long serialVersionUID = 1L;
 
     public String getpId() {
@@ -37,12 +39,12 @@ public class Post implements Serializable {
         this.pId = pId == null ? null : pId.trim();
     }
 
-    public String getpUid() {
+    public Integer getpUid() {
         return pUid;
     }
 
-    public void setpUid(String pUid) {
-        this.pUid = pUid == null ? null : pUid.trim();
+    public void setpUid(Integer pUid) {
+        this.pUid = pUid;
     }
 
     public String getpTitle() {
@@ -77,12 +79,12 @@ public class Post implements Serializable {
         this.tags = tags == null ? null : tags.trim();
     }
 
-    public String getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
     public Integer getIshot() {
@@ -123,5 +125,13 @@ public class Post implements Serializable {
 
     public void setIspass(Integer ispass) {
         this.ispass = ispass;
+    }
+
+    public User getUser() {
+        return pUser;
+    }
+
+    public void setUser(User pUser) {
+        this.pUser = pUser;
     }
 }

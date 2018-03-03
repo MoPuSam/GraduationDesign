@@ -1,9 +1,17 @@
 package com.cn.hnust.controller;
 
+import com.cn.hnust.pojo.User;
+import com.cn.hnust.service.IUserService;
 import com.cn.hnust.util.CheckCodeUtil;
+import com.cn.hnust.util.Crypt;
+import com.cn.hnust.util.SendMobileMessageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,9 +24,39 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+    @Resource
+    private IUserService userService;
+
     @RequestMapping("/index")
     public String toLoginPage(){
         return "login";
+    }
+    @RequestMapping("/regist")
+    public String toRegistPage(){
+        return "regist";
+    }
+    @RequestMapping("/home")
+    public ModelAndView toHomePage(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String username = request.getParameter("username");
+        User user = userService.getUserByName(username);
+        if(user==null){
+            mv.addObject("message","不存在该用户");
+            mv.setViewName("login");
+        }
+        String password = request.getParameter("password");
+        boolean ispass = false;
+        if(password!=null&&!"".equals(password)){
+           String encode = user.getuPassword();
+            ispass = password.equals(Crypt.unencrype(encode));
+        }
+        if(ispass){
+            session.setAttribute("uid",user.getuId());
+            session.setAttribute("nickname",user.getuNickname());
+            mv.setViewName("home");
+        }
+        return mv;
     }
     @RequestMapping("/checkcode")
     public void getCheckCode(HttpServletRequest request , HttpServletResponse response) throws IOException {
@@ -30,7 +68,7 @@ public class LoginController {
         System.out.println("hello : " + uri);
 
         final int width = 180; // 图片宽度
-        final int height = 40; // 图片高度
+        final int height = 50; // 图片高度
         final String imgType = "jpeg"; // 指定图片格式 (不是指MIME类型)
         final OutputStream output = response.getOutputStream(); // 获得可以向客户端返回图片的输出流
         // (字节流)
@@ -39,9 +77,18 @@ public class LoginController {
         System.out.println("验证码内容: " + code);
 
         // 建立 uri 和 相应的 验证码 的关联 ( 存储到当前会话对象的属性中 )
-        session.setAttribute(uri, code);
+        session.setAttribute("validate", code);
 
-        System.out.println(session.getAttribute(uri));
+        System.out.println(session.getAttribute("validate"));
 
+    }
+    @RequestMapping(value = "/send",method = RequestMethod.POST)
+    public @ResponseBody String sendMessage(HttpServletRequest request, HttpServletResponse response){
+        String phone = request.getParameter("phone");
+        String validate = String.valueOf(CheckCodeUtil.getMessageValidate());
+        HttpSession session = request.getSession();
+        session.setAttribute("validate",validate);
+        SendMobileMessageUtil.sendMessage(phone,validate);
+        return validate;
     }
 }

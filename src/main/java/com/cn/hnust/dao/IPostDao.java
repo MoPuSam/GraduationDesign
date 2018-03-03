@@ -3,6 +3,8 @@ package com.cn.hnust.dao;
 import com.cn.hnust.pojo.Post;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("postDao")
 public interface IPostDao {
     int deleteByPrimaryKey(String pId);
@@ -16,4 +18,6 @@ public interface IPostDao {
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKey(Post record);
+
+    List<Post> getAllPost();
 }

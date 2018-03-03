@@ -5,4 +5,7 @@ import com.cn.hnust.pojo.User;
 
 public interface IUserService {
 	public User getUserById(int userId);
+	public void insertUser(User user);
+	public User getUserByName(String name);
+    public void updateUserHead(String uid, String headImgPath);
 }

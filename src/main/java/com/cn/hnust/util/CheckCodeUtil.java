@@ -65,4 +65,12 @@ public class CheckCodeUtil {
         }
         return sb.toString();
     }
+
+    /**
+     * 手机短信验证码生成
+     * @return
+     */
+    public static int getMessageValidate(){
+        return (int)(Math.random()*9+1)*1000;
+    }
 }

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cn.hnust.dao.IPostDao" >
-  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.Post" >
+  <resultMap id="PostMap" type="com.cn.hnust.pojo.Post" >
     <id column="p_id" property="pId" jdbcType="VARCHAR" />
-    <result column="p_uid" property="pUid" jdbcType="VARCHAR" />
+    <result column="p_uid" property="pUid" jdbcType="INTEGER" />
     <result column="p_title" property="pTitle" jdbcType="VARCHAR" />
     <result column="p_content" property="pContent" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
     <result column="tags" property="tags" jdbcType="VARCHAR" />
-    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="INTEGER" />
     <result column="ishot" property="ishot" jdbcType="INTEGER" />
     <result column="istop" property="istop" jdbcType="INTEGER" />
     <result column="Isgood" property="isgood" jdbcType="INTEGER" />
     <result column="hits" property="hits" jdbcType="INTEGER" />
     <result column="ispass" property="ispass" jdbcType="INTEGER" />
+    <association property="pUser" column="p_uid" select="com.cn.hnust.dao.IUserDao.selectByPrimaryKey"/>
   </resultMap>
   <sql id="Base_Column_List" >
     p_id, p_uid, p_title, p_content, update_time, tags, category, ishot, istop, Isgood, 
     hits, ispass
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="PostMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from gf_posts
@@ -35,9 +36,9 @@
       category, ishot, istop, 
       Isgood, hits, ispass
       )
-    values (#{pId,jdbcType=VARCHAR}, #{pUid,jdbcType=VARCHAR}, #{pTitle,jdbcType=VARCHAR}, 
+    values (#{pId,jdbcType=VARCHAR}, #{pUid,jdbcType=INTEGER}, #{pTitle,jdbcType=VARCHAR},
       #{pContent,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{category,jdbcType=VARCHAR}, #{ishot,jdbcType=INTEGER}, #{istop,jdbcType=INTEGER}, 
+      #{category,jdbcType=INTEGER}, #{ishot,jdbcType=INTEGER}, #{istop,jdbcType=INTEGER},
       #{isgood,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{ispass,jdbcType=INTEGER}
       )
   </insert>
@@ -86,7 +87,7 @@
         #{pId,jdbcType=VARCHAR},
       </if>
       <if test="pUid != null" >
-        #{pUid,jdbcType=VARCHAR},
+        #{pUid,jdbcType=INTEGER},
       </if>
       <if test="pTitle != null" >
         #{pTitle,jdbcType=VARCHAR},
@@ -101,7 +102,7 @@
         #{tags,jdbcType=VARCHAR},
       </if>
       <if test="category != null" >
-        #{category,jdbcType=VARCHAR},
+        #{category,jdbcType=INTEGER},
       </if>
       <if test="ishot != null" >
         #{ishot,jdbcType=INTEGER},
@@ -124,7 +125,7 @@
     update gf_posts
     <set >
       <if test="pUid != null" >
-        p_uid = #{pUid,jdbcType=VARCHAR},
+        p_uid = #{pUid,jdbcType=INTEGER},
       </if>
       <if test="pTitle != null" >
         p_title = #{pTitle,jdbcType=VARCHAR},
@@ -139,7 +140,7 @@
         tags = #{tags,jdbcType=VARCHAR},
       </if>
       <if test="category != null" >
-        category = #{category,jdbcType=VARCHAR},
+        category = #{category,jdbcType=INTEGER},
       </if>
       <if test="ishot != null" >
         ishot = #{ishot,jdbcType=INTEGER},
@@ -161,12 +162,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.Post" >
     update gf_posts
-    set p_uid = #{pUid,jdbcType=VARCHAR},
+    set p_uid = #{pUid,jdbcType=INTEGER},
       p_title = #{pTitle,jdbcType=VARCHAR},
       p_content = #{pContent,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
+      category = #{category,jdbcType=INTEGER},
       ishot = #{ishot,jdbcType=INTEGER},
       istop = #{istop,jdbcType=INTEGER},
       Isgood = #{isgood,jdbcType=INTEGER},
@@ -174,4 +175,9 @@
       ispass = #{ispass,jdbcType=INTEGER}
     where p_id = #{pId,jdbcType=VARCHAR}
   </update>
+  <select id="getAllPost" resultMap="PostMap" >
+    select
+    <include refid="Base_Column_List" />
+    from gf_posts
+  </select>
 </mapper>
